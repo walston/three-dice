@@ -1,12 +1,17 @@
 const path = require("path");
-const { node } = require("webpack");
+const { SourceMapDevToolPlugin } = require("webpack");
+
+const prod = process.env.NODE_ENV === "production";
+if (prod) console.log("Building in production");
 
 module.exports = {
   entry: "./src/index.ts",
-  mode: process.env.PRODUCTION ? "production" : "development",
+  mode: prod ? "production" : "development",
+  devtool: prod ? undefined : "inline-source-map",
   module: {
     rules: [{ test: /\.ts$/, use: "ts-loader", exclude: /node_modules/ }],
   },
+  plugins: [new SourceMapDevToolPlugin()],
   resolve: {
     extensions: [".ts", ".js"],
   },
