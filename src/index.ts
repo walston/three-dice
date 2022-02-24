@@ -1,6 +1,6 @@
 import {
   BoxGeometry,
-  Light,
+  PointLight,
   Mesh,
   MeshPhongMaterial,
   PerspectiveCamera,
@@ -20,13 +20,14 @@ const renderer = new WebGLRenderer();
 const geometry = new BoxGeometry();
 const material = new MeshPhongMaterial({ color: 0x00ff00 });
 const cube = new Mesh(geometry, material);
-const light = new Light();
+const light = new PointLight();
 
 scene.add(cube);
 scene.add(light);
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.z = 15;
 light.position.z = 18;
+light.position.x = 5;
 
 document.body.appendChild(renderer.domElement);
 
